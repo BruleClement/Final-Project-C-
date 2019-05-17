@@ -1,0 +1,1749 @@
+<html>
+<head>
+<title>main.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808000;}
+.s1 { color: #000000;}
+.s2 { color: #008000; font-weight: bold;}
+.s3 { color: #000080; font-weight: bold;}
+.s4 { color: #808080; font-style: italic;}
+.s5 { color: #0000ff;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+main.cpp</font>
+</center></td></tr></table>
+<pre><span class="s0">#include </span><span class="s2">&lt;iostream&gt;</span>
+<span class="s0">#include </span><span class="s2">&lt;cmath&gt;</span>
+<span class="s0">#include </span><span class="s2">&lt;time.h&gt;</span>
+<span class="s0">#include </span><span class="s2">&lt;cstdlib&gt;</span>
+<span class="s0">#include </span><span class="s2">&lt;stdio.h&gt;</span>
+<span class="s0">#include </span><span class="s2">&lt;math.h&gt;</span>
+<span class="s0">#include </span><span class="s2">&lt;stdlib.h&gt;</span>
+<span class="s0">#include </span><span class="s2">&lt;fstream&gt;</span>
+<span class="s0">#include </span><span class="s2">&lt;iomanip&gt;</span>
+<span class="s0">#include </span><span class="s2">&lt;string&gt;</span>
+
+
+
+<span class="s3">using namespace </span>std;
+
+<span class="s4">/* 
+ * 
+ */</span>
+<span class="s3">int </span>Enter_date_starting_month()
+{
+    <span class="s3">int </span>month=<span class="s5">0</span>;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter the date you want to start the credit : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter the Month you want to start the credit : (Exemple 8) </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>;
+    cout&lt;&lt;<span class="s2">&quot; &quot;</span>;
+    cin&gt;&gt;month;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    <span class="s3">if</span>((month&gt;<span class="s5">12</span>)||(month&lt;<span class="s5">1</span>))
+    {
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[31;40m The starting Month is not good try again with an other date</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        month=Enter_date_starting_month();
+    }
+    <span class="s3">return </span>month;
+}
+
+<span class="s3">int </span>Enter_date_starting_year()
+{
+    <span class="s3">int </span>years=<span class="s5">0</span>;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter the Year you want to start the credit : (Exemple 1964)</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>;
+    cout&lt;&lt;<span class="s2">&quot; &quot;</span>;
+    cin&gt;&gt;years;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    <span class="s3">if</span>(years&lt;<span class="s5">0</span>)
+    {
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[31;40m The starting Year is not good try again with an other date </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        years=Enter_date_starting_year();
+    }
+    <span class="s3">return </span>years;
+}
+
+<span class="s3">int </span>Enter_date_starting_month_of_today()
+{
+    <span class="s3">int </span>month=<span class="s5">0</span>;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m You will enter the date of today : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter the month of Today : (Exemple 8) </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>;
+    cout&lt;&lt;<span class="s2">&quot; &quot;</span>;
+    cin&gt;&gt;month;
+
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    <span class="s3">if</span>((month&gt;<span class="s5">12</span>)||(month&lt;<span class="s5">1</span>))
+    {
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[31;40m The Month of today is not good try again with an other date      </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        month=Enter_date_starting_month_of_today();
+    }
+    <span class="s3">return </span>month;
+}
+
+<span class="s3">int </span>Enter_date_starting_year_of_today()
+{
+    <span class="s3">int </span>years=<span class="s5">0</span>;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter the Year of Today : (Exemple 1964) </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>;
+    cout&lt;&lt;<span class="s2">&quot; &quot;</span>;
+    cin&gt;&gt;years;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    <span class="s3">if</span>(years&lt;<span class="s5">0</span>)
+    {
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[31;40m The Year of today is not good try again with an other date </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        years=Enter_date_starting_year_of_today();
+    }
+    <span class="s3">return </span>years;
+}
+
+string enterName()
+{
+    string Name;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter your Name : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>;
+    cout&lt;&lt;<span class="s2">&quot; &quot;</span>;
+    cin&gt;&gt;Name;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+
+    <span class="s3">return </span>Name;
+}
+string enterFirstName()
+{
+    string FirstName;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter your First Name : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>;
+    cout&lt;&lt;<span class="s2">&quot; &quot;</span>;
+    cin&gt;&gt;FirstName;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    <span class="s3">return </span>FirstName;
+}
+
+<span class="s3">double </span>Enter_interestrate()
+{
+    <span class="s3">double </span>InterestRate=<span class="s5">0</span>;
+    <span class="s3">double </span>InterestRateinpourcentage=<span class="s5">0</span>;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter the Interest rate per year you want (in %) : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>;
+    cout&lt;&lt;<span class="s2">&quot; &quot;</span>;
+    cin&gt;&gt;InterestRateinpourcentage;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    InterestRate=InterestRateinpourcentage/<span class="s5">100</span>;
+    <span class="s3">if</span>((InterestRate&gt;<span class="s5">0.1</span>)||(InterestRate&lt;<span class="s5">0</span>))
+    {
+        cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[31;40m The Interest Rate is not legal, try Again With another Interest Rate </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        InterestRate = Enter_interestrate();
+    }
+    <span class="s3">return </span>InterestRate;
+}
+
+<span class="s3">int </span>Enter_numberofyears()
+{
+    <span class="s3">int </span>NumberOfYears=<span class="s5">0</span>;
+
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter the Number of years you want to pay your credit : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>;
+    cout&lt;&lt;<span class="s2">&quot; &quot;</span>;
+    cin&gt;&gt;NumberOfYears;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    <span class="s3">if</span>((NumberOfYears&gt;<span class="s5">50</span>)||(NumberOfYears&lt;<span class="s5">0</span>))
+    {
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[31;40m The Number of Years is not legal, try Again With another Number Of Years </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        NumberOfYears=Enter_numberofyears();
+    }
+    <span class="s3">return </span>NumberOfYears;
+}
+
+<span class="s3">double </span>Enter_principal()
+{
+    <span class="s3">double </span>Principal=<span class="s5">0</span>;
+
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter the principal you want : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>;
+    cout&lt;&lt;<span class="s2">&quot; &quot;</span>;
+    cin&gt;&gt;Principal;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    <span class="s3">return </span>Principal;
+}
+
+<span class="s3">double </span>Enter_openingbalance()
+{
+    <span class="s3">double </span>OpeningBalance=<span class="s5">0</span>;
+
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter the Opening Balance you want : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>;
+    cout&lt;&lt;<span class="s2">&quot; &quot;</span>;
+    cin&gt;&gt;OpeningBalance;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    <span class="s3">return </span>OpeningBalance;
+}
+
+<span class="s3">double </span>Enter_instalment()
+{
+    <span class="s3">double </span>Instalment=<span class="s5">0</span>;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter the instalment you want : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>;
+    cout&lt;&lt;<span class="s2">&quot; &quot;</span>;
+    cin&gt;&gt;Instalment;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    <span class="s3">return </span>Instalment;
+
+}
+
+<span class="s3">double </span>Variable_Interest_Rate_mean()
+{
+    <span class="s3">double </span>IR_mean=<span class="s5">0</span>;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter the Man for the Interest Rate you want : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>;
+    cout&lt;&lt;<span class="s2">&quot; &quot;</span>;
+    cin&gt;&gt;IR_mean;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    <span class="s3">if</span>(IR_mean&gt;<span class="s5">5</span>)
+    {
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[31;40m The Mean of the Interest Rate is not legal, try again </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        IR_mean=Variable_Interest_Rate_mean();
+    }
+    <span class="s3">return </span>IR_mean;
+
+}
+
+<span class="s3">double </span>Variable_Interest_Rate_StDev()
+{
+    <span class="s3">double </span>IR_stDev=<span class="s5">0</span>;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter the ST_DEV you want : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>;
+    cout&lt;&lt;<span class="s2">&quot; &quot;</span>;
+    cin&gt;&gt;IR_stDev;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    <span class="s3">if</span>(IR_stDev&gt;<span class="s5">5</span>)
+    {
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[31;40m The ST_DEV of the Interest Rate is not legal, try again </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        IR_stDev=Variable_Interest_Rate_StDev();
+    }
+    <span class="s3">return </span>IR_stDev;
+
+}
+
+<span class="s3">double </span>box_muller(<span class="s3">double </span>margin_constant, <span class="s3">double </span>Variance) {
+    <span class="s3">double </span>Unif_Value1 , Unif_Value2, Normal_value, Benchmark_rate;
+
+        <span class="s3">do </span>{
+
+            srand((<span class="s3">unsigned</span>)time(NULL));
+            Unif_Value1 = <span class="s5">2.0 </span>* ((<span class="s3">double</span>)rand() / (RAND_MAX)) - <span class="s5">1.0</span>;
+            Unif_Value2 = <span class="s5">2.0 </span>* ((<span class="s3">double</span>)rand() / (RAND_MAX)) - <span class="s5">1.0</span>;
+
+            Normal_value = Unif_Value1 * Unif_Value1 + Unif_Value2 * Unif_Value2;
+        } <span class="s3">while </span>(Normal_value &gt;= <span class="s5">1.0</span>);
+        Normal_value = sqrt((-<span class="s5">2.0 </span>* log(Normal_value)) / Normal_value);
+        Benchmark_rate = Unif_Value2 * Normal_value;
+        Benchmark_rate=margin_constant+Benchmark_rate*Variance;
+
+
+
+    <span class="s3">return </span>Benchmark_rate;
+}
+
+
+string frequency()
+{
+    string Frequence;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter the Frequency you want pay your credit? (yearly/semi-annually/quarterly/monthly) </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>;
+    cout&lt;&lt;<span class="s2">&quot; &quot;</span>;
+    cin&gt;&gt;Frequence;
+    <span class="s3">if</span>((Frequence==<span class="s2">&quot;yearly&quot;</span>)||(Frequence==<span class="s2">&quot;Yearly&quot;</span>)||(Frequence==<span class="s2">&quot;YEARLY&quot;</span>))
+    {
+        Frequence=<span class="s2">&quot;yearly&quot;</span>;
+
+
+    }
+    <span class="s3">if</span>((Frequence==<span class="s2">&quot;semi-annually&quot;</span>)||(Frequence==<span class="s2">&quot;Semi-annually&quot;</span>)||(Frequence==<span class="s2">&quot;Semi-Annually&quot;</span>)||(Frequence==<span class="s2">&quot;semi-Annually&quot;</span>)||(Frequence==<span class="s2">&quot;semi annually&quot;</span>)||(Frequence==<span class="s2">&quot;Semi Annually&quot;</span>)||(Frequence==<span class="s2">&quot;Semi annually&quot;</span>)||(Frequence==<span class="s2">&quot;semi Annually&quot;</span>)||(Frequence==<span class="s2">&quot;SEMI ANNUALLY&quot;</span>)||(Frequence==<span class="s2">&quot;SEMI-ANNUALLY&quot;</span>))
+    {
+        Frequence=<span class="s2">&quot;semi-annually&quot;</span>;
+
+
+    }
+    <span class="s3">if</span>((Frequence==<span class="s2">&quot;quarterly&quot;</span>)||(Frequence==<span class="s2">&quot;Quarterly&quot;</span>)||(Frequence==<span class="s2">&quot;QUARTERLY&quot;</span>))
+    {
+        Frequence=<span class="s2">&quot;quarterly&quot;</span>;
+
+
+    }
+    <span class="s3">if</span>((Frequence==<span class="s2">&quot;monthly&quot;</span>)||(Frequence==<span class="s2">&quot;Monthly&quot;</span>)||(Frequence==<span class="s2">&quot;MONTHLY&quot;</span>))
+    {
+        Frequence=<span class="s2">&quot;monthly&quot;</span>;
+
+
+    }
+    <span class="s3">if</span>((Frequence!=<span class="s2">&quot;monthly&quot;</span>)&amp;&amp;(Frequence!=<span class="s2">&quot;Monthly&quot;</span>)&amp;&amp;(Frequence!=<span class="s2">&quot;MONTHLY&quot;</span>)&amp;&amp;(Frequence!=<span class="s2">&quot;quarterly&quot;</span>)&amp;&amp;(Frequence!=<span class="s2">&quot;Quarterly&quot;</span>)&amp;&amp;(Frequence!=<span class="s2">&quot;QUARTERLY&quot;</span>)&amp;&amp;(Frequence!=<span class="s2">&quot;yearly&quot;</span>)&amp;&amp;(Frequence!=<span class="s2">&quot;Yearly&quot;</span>)&amp;&amp;(Frequence!=<span class="s2">&quot;YEARLY&quot;</span>)&amp;&amp;(Frequence!=<span class="s2">&quot;semi-annually&quot;</span>)&amp;&amp;(Frequence!=<span class="s2">&quot;Semi-annually&quot;</span>)&amp;&amp;(Frequence!=<span class="s2">&quot;Semi-Annually&quot;</span>)&amp;&amp;(Frequence!=<span class="s2">&quot;semi-Annually&quot;</span>)&amp;&amp;(Frequence!=<span class="s2">&quot;semi annually&quot;</span>)&amp;&amp;(Frequence!=<span class="s2">&quot;Semi Annually&quot;</span>)&amp;&amp;(Frequence!=<span class="s2">&quot;Semi annually&quot;</span>)&amp;&amp;(Frequence!=<span class="s2">&quot;semi Annually&quot;</span>)&amp;&amp;(Frequence!=<span class="s2">&quot;SEMI ANNUALLY&quot;</span>)&amp;&amp;(Frequence!=<span class="s2">&quot;SEMI-ANNUALLY&quot;</span>))
+    {
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[31;40m We can't read what you write you need try again </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        frequency();
+    }
+    <span class="s3">return </span>Frequence;
+
+}
+
+
+
+<span class="s3">int </span>final_number_i(<span class="s3">int </span>NumberOfYears,string Frequence)
+{
+    <span class="s3">if</span>(Frequence==<span class="s2">&quot;semi-annually&quot;</span>)
+    {
+
+        NumberOfYears=NumberOfYears*<span class="s5">2</span>;
+
+    }
+    <span class="s3">else if</span>(Frequence==<span class="s2">&quot;quarterly&quot;</span>)
+    {
+        NumberOfYears=NumberOfYears*<span class="s5">4</span>;
+
+    }
+    <span class="s3">else if</span>(Frequence==<span class="s2">&quot;monthly&quot;</span>)
+    {
+        NumberOfYears=NumberOfYears*<span class="s5">12</span>;
+
+    }
+    <span class="s3">return </span>NumberOfYears;
+
+}
+
+<span class="s3">double </span>frequency_Interest_rate(<span class="s3">double </span>InterestRate,string Frequence)
+{
+
+
+    <span class="s3">if</span>(Frequence==<span class="s2">&quot;semi-annually&quot;</span>)
+    {
+
+        InterestRate=InterestRate/<span class="s5">2</span>;
+
+    }
+    <span class="s3">else if</span>(Frequence==<span class="s2">&quot;quarterly&quot;</span>)
+    {
+        InterestRate=InterestRate/<span class="s5">4</span>;
+
+    }
+    <span class="s3">else if</span>(Frequence==<span class="s2">&quot;monthly&quot;</span>)
+    {
+        InterestRate=InterestRate/<span class="s5">12</span>;
+
+    }
+    <span class="s3">else</span>
+    {
+        InterestRate=InterestRate;
+    }
+    <span class="s3">return </span>InterestRate;
+
+}
+
+<span class="s3">void </span>Fixed_OpeningBalance_InterestRate_Principal(<span class="s3">double </span>OpeningBalance,<span class="s3">double </span>InterestRate,<span class="s3">double </span>Principal,<span class="s3">int </span>Month,<span class="s3">int </span>Year,string Frequence)
+{
+
+
+    ofstream outData;
+    outData.open(<span class="s2">&quot;Final Project.csv&quot;</span>,ios::app);
+    outData&lt;&lt;endl;
+    outData&lt;&lt;endl;
+    <span class="s4">/* First I create all variable I need on the Programm*/</span>
+
+    <span class="s3">int </span>NumberOfYears=<span class="s5">0</span>;
+    <span class="s3">double </span>Interest=<span class="s5">0</span>;
+    <span class="s3">double </span>Instalment=<span class="s5">0</span>;
+    <span class="s3">double </span>ClosingBalance=<span class="s5">0</span>;
+    <span class="s3">double </span>SumPrincipal=<span class="s5">0</span>;
+
+    <span class="s4">/* I search How many time the person will need to pay*/</span>
+
+    NumberOfYears=OpeningBalance/Principal;
+    NumberOfYears=final_number_i(NumberOfYears,Frequence);
+    InterestRate=frequency_Interest_rate(InterestRate,Frequence);
+    <span class="s4">/* I Create the array*/</span>
+
+    outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;#&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Date&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Opening Balance &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Principal &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Interest Rate &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Interest &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Instalment &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Closing Balance &quot;</span>&lt;&lt;endl;
+    outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;i&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;D&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PVi-1&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Pi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Ri&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;INTi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PMTi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PVi&quot;</span>&lt;&lt;endl;
+
+
+    <span class="s4">/* I calculate year by year How many the person will need to pay*/</span>
+
+    <span class="s3">for</span>(<span class="s3">int </span>i=<span class="s5">1</span>;i&lt;NumberOfYears+<span class="s5">1</span>;i++)
+    {
+        Interest=OpeningBalance*InterestRate;
+        Instalment=Principal+Interest;
+        ClosingBalance=OpeningBalance-Principal;
+        SumPrincipal=Principal+SumPrincipal;
+
+        <span class="s4">/* I Display the array*/</span>
+
+        outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;i&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Month&lt;&lt;<span class="s2">&quot;/&quot;</span>&lt;&lt;Year&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;OpeningBalance&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Principal&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;InterestRate&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Interest&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Instalment&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;ClosingBalance&lt;&lt;endl;
+        OpeningBalance=ClosingBalance;
+        <span class="s3">if</span>(Frequence==<span class="s2">&quot;semi-annually&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;=<span class="s5">6</span>)
+            {
+                Month=Month+<span class="s5">6</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">6</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;quarterly&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;=<span class="s5">8</span>)
+            {
+                Month=Month+<span class="s5">3</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">3</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;monthly&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;<span class="s5">12</span>)
+            {
+                Month=Month+<span class="s5">1</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">1</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;yearly&quot;</span>)
+        {
+            Year=Year+<span class="s5">1</span>;
+        }
+    }
+
+
+    outData&lt;&lt;<span class="s2">&quot;;;;;&quot;</span>&lt;&lt;SumPrincipal&lt;&lt;endl;
+    outData&lt;&lt;endl;
+}
+
+<span class="s4">/* This program is for a Fixed Opening Balance, a Fixed Interest Rate and a Fixed Number Of Years*/</span>
+<span class="s3">void </span>Fixed_OpeningBalance_InterestRate_NumberOfYears(<span class="s3">double </span>OpeningBalance,<span class="s3">double </span>InterestRate,<span class="s3">int </span>NumberOfYears,<span class="s3">int </span>Month,<span class="s3">int </span>Year,string Frequence)
+{
+    ofstream outData;
+    outData.open(<span class="s2">&quot;Final Project.csv&quot;</span>,ios::app);
+    outData&lt;&lt;endl;
+    outData&lt;&lt;endl;
+    <span class="s4">/* First I create all variable I need on the Programm*/</span>
+
+    <span class="s3">double </span>Instalment=<span class="s5">0</span>;
+    <span class="s3">double </span>Interest=<span class="s5">0</span>;
+    <span class="s3">double </span>Principal=<span class="s5">0</span>;
+    <span class="s3">double </span>ClosingBalance=<span class="s5">0</span>;
+    <span class="s3">double </span>SumPrincipal=<span class="s5">0</span>;
+
+    <span class="s4">/* I search the Principal*/</span>
+
+    Principal=OpeningBalance/NumberOfYears;
+
+    <span class="s4">/* I Create the array*/</span>
+
+    outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;#&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Date&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Opening Balance &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Principal &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Interest Rate &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Interest &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Instalment &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Closing Balance &quot;</span>&lt;&lt;endl;
+    outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;i&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;D&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PVi-1&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Pi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Ri&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;INTi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PMTi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PVi&quot;</span>&lt;&lt;endl;
+
+    <span class="s4">/* I calculate year by year How many the person will need to pay*/</span>
+
+    <span class="s3">for</span>(<span class="s3">int </span>i=<span class="s5">1</span>;i&lt;NumberOfYears+<span class="s5">1</span>;i++)
+    {
+
+        Interest=OpeningBalance*InterestRate;
+        Instalment=Principal+Interest;
+        ClosingBalance=OpeningBalance-Principal;
+        SumPrincipal=Principal+SumPrincipal;
+
+        <span class="s4">/* I Display the array*/</span>
+
+        outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;i&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Month&lt;&lt;<span class="s2">&quot;/&quot;</span>&lt;&lt;Year&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;OpeningBalance&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Principal&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;InterestRate&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Interest&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Instalment&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;ClosingBalance&lt;&lt;endl;
+        OpeningBalance=ClosingBalance;
+        <span class="s3">if</span>(Frequence==<span class="s2">&quot;semi-annually&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;=<span class="s5">6</span>)
+            {
+                Month=Month+<span class="s5">6</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">6</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;quarterly&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;=<span class="s5">8</span>)
+            {
+                Month=Month+<span class="s5">3</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">3</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;monthly&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;<span class="s5">12</span>)
+            {
+                Month=Month+<span class="s5">1</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">1</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;yearly&quot;</span>)
+        {
+            Year=Year+<span class="s5">1</span>;
+        }
+    }
+    outData&lt;&lt;<span class="s2">&quot;;;;;&quot;</span>&lt;&lt;SumPrincipal&lt;&lt;endl;
+    outData&lt;&lt;endl;
+}
+
+<span class="s4">/* This program is for a Fixed Principal, a Fixed Interest Rate and a Fixed Number Of Years*/</span>
+<span class="s3">void </span>Fixed_Principal_InterestRate_NumberOfYears(<span class="s3">double </span>Principal, <span class="s3">double </span>InterestRate, <span class="s3">int </span>NumberOfYears,<span class="s3">int </span>Month,<span class="s3">int </span>Year,string Frequence)
+{
+    ofstream outData;
+    outData.open(<span class="s2">&quot;Final Project.csv&quot;</span>,ios::app);
+    outData&lt;&lt;endl;
+    outData&lt;&lt;endl;
+    <span class="s4">/* First I create all variable I need on the Programm*/</span>
+
+    <span class="s3">double </span>Instalment=<span class="s5">0</span>;
+    <span class="s3">double </span>Interest=<span class="s5">0</span>;
+    <span class="s3">double </span>OpeningBalance=<span class="s5">0</span>;
+    <span class="s3">double </span>ClosingBalance=<span class="s5">0</span>;
+    <span class="s3">double </span>SumPrincipal=<span class="s5">0</span>;
+
+    <span class="s4">/* I search the Principal*/</span>
+
+    OpeningBalance=Principal*NumberOfYears;
+
+    <span class="s4">/* I Create the array*/</span>
+
+    outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;#&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Date&quot;</span>&lt;&lt;<span class="s2">&quot; Opening Balance &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Principal &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Interest Rate &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Interest &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Instalment &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Closing Balance &quot;</span>&lt;&lt;endl;
+    outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;i&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;D&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PVi-1&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Pi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Ri&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;INTi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PMTi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PVi&quot;</span>&lt;&lt;endl;
+
+    <span class="s4">/* I calculate year by year How many the person will need to pay*/</span>
+
+    <span class="s3">for</span>(<span class="s3">int </span>i=<span class="s5">1</span>;i&lt;NumberOfYears+<span class="s5">1</span>;i++)
+    {
+        Interest=OpeningBalance*InterestRate;
+        Instalment=Principal+Interest;
+        ClosingBalance=OpeningBalance-Principal;
+        SumPrincipal=Principal+SumPrincipal;
+
+        <span class="s4">/* I Display the array*/</span>
+
+        outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;i&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Month&lt;&lt;<span class="s2">&quot;/&quot;</span>&lt;&lt;Year&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;OpeningBalance&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Principal&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;InterestRate&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Interest&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Instalment&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;ClosingBalance&lt;&lt;endl;
+        OpeningBalance=ClosingBalance;
+        <span class="s3">if</span>(Frequence==<span class="s2">&quot;semi-annually&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;=<span class="s5">6</span>)
+            {
+                Month=Month+<span class="s5">6</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">6</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;quarterly&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;=<span class="s5">8</span>)
+            {
+                Month=Month+<span class="s5">3</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">3</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;monthly&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;<span class="s5">12</span>)
+            {
+                Month=Month+<span class="s5">1</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">1</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;yearly&quot;</span>)
+        {
+            Year=Year+<span class="s5">1</span>;
+        }
+    }
+    outData&lt;&lt;<span class="s2">&quot;;;;;&quot;</span>&lt;&lt;SumPrincipal&lt;&lt;endl;
+    outData&lt;&lt;endl;
+
+}
+
+<span class="s4">/* The different program are whith an inconstant Interest and an inconstant Prncipal */</span>
+
+/* This program is for a Fixed Opening Balance, a Fixed Interest Rate and a Fixed Instalment*/
+<span class="s3">void </span>Fixed_OpeningBalance_InterestRate_Instalment(<span class="s3">double </span>OpeningBalance,<span class="s3">double </span>InterestRate,<span class="s3">double </span>Instalment,<span class="s3">int </span>Month,<span class="s3">int </span>Year,string Frequence)
+{
+    ofstream outData;
+    outData.open(<span class="s2">&quot;Final Project.csv&quot;</span>,ios::app);
+    outData&lt;&lt;endl;
+    outData&lt;&lt;endl;
+    <span class="s4">/* First I create all variable I need on the Programm*/</span>
+
+    <span class="s3">int </span>NumberOfYears=<span class="s5">0</span>;
+    <span class="s3">double </span>Principal=<span class="s5">0</span>;
+    <span class="s3">double </span>Interest=<span class="s5">0</span>;
+    <span class="s3">double </span>ClosingBalance=<span class="s5">0</span>;
+    <span class="s3">double </span>i=<span class="s5">1</span>;
+    <span class="s3">double </span>SumPrincipal=<span class="s5">0</span>;
+
+    outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;#&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Date&quot;</span>&lt;&lt;<span class="s2">&quot; Opening Balance &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Principal &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Interest Rate &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Interest &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Instalment &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Closing Balance &quot;</span>&lt;&lt;endl;
+    outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;i&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;D&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PVi-1&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Pi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Ri&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;INTi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PMTi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PVi&quot;</span>&lt;&lt;endl;
+
+    <span class="s4">/* I calculate year by year How many the person will need to pay*/</span>
+
+    <span class="s3">for</span>(OpeningBalance=OpeningBalance;OpeningBalance&gt;Instalment;OpeningBalance=OpeningBalance-Principal)
+    {
+        Interest=OpeningBalance*InterestRate;
+        Principal=Instalment-Interest;
+        ClosingBalance=OpeningBalance-Principal;
+        SumPrincipal=Principal+SumPrincipal;
+        outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;i&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Month&lt;&lt;<span class="s2">&quot;/&quot;</span>&lt;&lt;Year&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;OpeningBalance&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Principal&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;InterestRate&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Interest&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Instalment&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;ClosingBalance&lt;&lt;endl;
+        i=i+<span class="s5">1</span>;
+        <span class="s3">if</span>(Frequence==<span class="s2">&quot;semi-annually&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;=<span class="s5">6</span>)
+            {
+                Month=Month+<span class="s5">6</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">6</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;quarterly&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;=<span class="s5">8</span>)
+            {
+                Month=Month+<span class="s5">3</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">3</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;monthly&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;<span class="s5">12</span>)
+            {
+                Month=Month+<span class="s5">1</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">1</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;yearly&quot;</span>)
+        {
+            Year=Year+<span class="s5">1</span>;
+        }
+
+
+    }
+    NumberOfYears=i;
+    outData&lt;&lt;<span class="s2">&quot;;;;;&quot;</span>&lt;&lt;SumPrincipal&lt;&lt;endl;
+    outData&lt;&lt;endl;
+
+
+
+}
+
+<span class="s4">/* This program is for a Fixed Number Of Years, a Fixed Interest Rate and a Fixed Instalment*/</span>
+
+
+
+
+
+
+
+
+
+
+<span class="s3">void </span>Fixed_NumberOfYears_InterestRate_Instalment(<span class="s3">double </span>NumberOfYears,<span class="s3">double </span>InterestRate,<span class="s3">double </span>Instalment,<span class="s3">int </span>Month,<span class="s3">int </span>Year,string Frequence)
+{
+    ofstream outData;
+    outData.open(<span class="s2">&quot;Final Project.csv&quot;</span>,ios::app);
+    outData&lt;&lt;endl;
+    outData&lt;&lt;endl;
+    <span class="s4">/* First I create all variable I need on the Programm*/</span>
+
+
+    <span class="s3">double </span>Principal=<span class="s5">0</span>;
+    <span class="s3">double </span>Interest=<span class="s5">0</span>;
+    <span class="s3">double </span>ClosingBalance=<span class="s5">0</span>;
+    <span class="s3">double </span>SumPrincipal=<span class="s5">0</span>;
+
+    outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;#&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Date&quot;</span>&lt;&lt;<span class="s2">&quot; Opening Balance &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Principal &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Interest Rate &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Interest &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Instalment &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Closing Balance &quot;</span>&lt;&lt;endl;
+    outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;i&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;D&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PVi-1&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Pi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Ri&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;INTi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PMTi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PVi&quot;</span>&lt;&lt;endl;
+
+    <span class="s4">/* I calculate the Opening Balance */</span>
+
+    <span class="s3">double </span>OpeningBalance=Instalment/(InterestRate*(<span class="s5">1</span>+(<span class="s5">1</span>/(pow(<span class="s5">1</span>+InterestRate,NumberOfYears)-<span class="s5">1</span>))));
+
+
+    <span class="s4">/* I calculate year by year How many the person will need to pay*/</span>
+
+    <span class="s3">for</span>(<span class="s3">int </span>i=<span class="s5">1</span>;i&lt;NumberOfYears+<span class="s5">1</span>;i++)
+    {
+        Interest=OpeningBalance*InterestRate;
+        Principal=Instalment-Interest;
+        ClosingBalance=OpeningBalance-Principal;
+        SumPrincipal=Principal+SumPrincipal;
+        outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;i&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Month&lt;&lt;<span class="s2">&quot;/&quot;</span>&lt;&lt;Year&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;OpeningBalance&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Principal&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;InterestRate&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Interest&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Instalment&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;ClosingBalance&lt;&lt;endl;
+        OpeningBalance=ClosingBalance;
+        <span class="s3">if</span>(Frequence==<span class="s2">&quot;semi-annually&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;=<span class="s5">6</span>)
+            {
+                Month=Month+<span class="s5">6</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">6</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;quarterly&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;=<span class="s5">8</span>)
+            {
+                Month=Month+<span class="s5">3</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">3</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;monthly&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;<span class="s5">12</span>)
+            {
+                Month=Month+<span class="s5">1</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">1</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;yearly&quot;</span>)
+        {
+            Year=Year+<span class="s5">1</span>;
+        }
+    }
+    outData&lt;&lt;<span class="s2">&quot;;;;;&quot;</span>&lt;&lt;SumPrincipal&lt;&lt;endl;
+    outData&lt;&lt;endl;
+
+}
+
+<span class="s3">void </span>Fixed_Instalment_NumberOfYears_OpeningBalance(<span class="s3">double </span>NumberOfYears,<span class="s3">double </span>OpeningBalance, <span class="s3">double </span>Instalment,<span class="s3">int </span>Month,<span class="s3">int </span>Year,string Frequence)
+{
+    ofstream outData;
+    outData.open(<span class="s2">&quot;Final Project.csv&quot;</span>,ios::app);
+    outData&lt;&lt;endl;
+    outData&lt;&lt;endl;
+    <span class="s4">/* First I create all variable I need on the Programm*/</span>
+
+    <span class="s3">double </span>Interest=<span class="s5">0</span>;
+    <span class="s3">double </span>Principal=<span class="s5">0</span>;
+    <span class="s3">double </span>ClosingBalance=<span class="s5">0</span>;
+    <span class="s3">double </span>SumPrincipal=<span class="s5">0</span>;
+    <span class="s3">double </span>ST_DEV=Variable_Interest_Rate_StDev();
+    <span class="s3">double </span>MEAN=Variable_Interest_Rate_mean();
+
+    <span class="s4">/* I search the Principal*/</span>
+
+    Principal=OpeningBalance/NumberOfYears;
+
+    <span class="s4">/* I Create the array*/</span>
+
+    outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;#&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Date&quot;</span>&lt;&lt;<span class="s2">&quot; Opening Balance &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Principal &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Floating Rate&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Periodic Interest Rate&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Interest &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Instalment &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Closing Balance &quot;</span>&lt;&lt;endl;
+    outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;i&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;D&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PVi-1&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Pi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Ri&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;INTi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Bi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PMTi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PVi&quot;</span>&lt;&lt;endl;
+
+    <span class="s4">/* I calculate year by year How many the person will need to pay*/</span>
+
+    <span class="s3">for</span>(<span class="s3">int </span>i=<span class="s5">1</span>;i&lt;NumberOfYears+<span class="s5">1</span>;i++)
+    {
+
+        <span class="s3">double </span>FloatingRate=box_muller(MEAN,ST_DEV);
+        <span class="s3">double </span>InterestRate=FloatingRate+MEAN;
+
+
+        Interest=OpeningBalance*InterestRate;
+        Instalment=Principal+Interest;
+        ClosingBalance=OpeningBalance-Principal;
+        SumPrincipal=Principal+SumPrincipal;
+
+        <span class="s4">/* I Display the array*/</span>
+
+        outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;i&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Month&lt;&lt;<span class="s2">&quot;/&quot;</span>&lt;&lt;Year&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;OpeningBalance&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Principal&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;InterestRate&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;FloatingRate&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Interest&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Instalment&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;ClosingBalance&lt;&lt;endl;
+        OpeningBalance=ClosingBalance;
+        <span class="s3">if</span>(Frequence==<span class="s2">&quot;semi-annually&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;=<span class="s5">6</span>)
+            {
+                Month=Month+<span class="s5">6</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">6</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;quarterly&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;=<span class="s5">8</span>)
+            {
+                Month=Month+<span class="s5">3</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">3</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;monthly&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;<span class="s5">12</span>)
+            {
+                Month=Month+<span class="s5">1</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">1</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;yearly&quot;</span>)
+        {
+            Year=Year+<span class="s5">1</span>;
+        }
+    }
+    outData&lt;&lt;<span class="s2">&quot;;;;;&quot;</span>&lt;&lt;SumPrincipal&lt;&lt;endl;
+    outData&lt;&lt;endl;
+
+}
+
+
+
+<span class="s3">void </span>Fixed_OpeningBalance_NumberOfYears_Principal(<span class="s3">double </span>NumberOfYears,<span class="s3">double </span>Principal, <span class="s3">double </span>OpeningBalance,<span class="s3">int </span>Month,<span class="s3">int </span>Year,string Frequence)
+{
+    ofstream outData;
+    outData.open(<span class="s2">&quot;Final Project.csv&quot;</span>,ios::app);
+    outData&lt;&lt;endl;
+    outData&lt;&lt;endl;
+    <span class="s4">/* First I create all variable I need on the Programm*/</span>
+
+    <span class="s3">double </span>Interest=<span class="s5">0</span>;
+    <span class="s3">double </span>Instalment=<span class="s5">0</span>;
+    <span class="s3">double </span>ClosingBalance=<span class="s5">0</span>;
+    <span class="s3">double </span>SumPrincipal=<span class="s5">0</span>;
+    <span class="s3">double </span>ST_DEV=Variable_Interest_Rate_StDev();
+    <span class="s3">double </span>MEAN=Variable_Interest_Rate_mean();
+
+
+
+
+
+    <span class="s4">/* I Create the array*/</span>
+
+    outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;#&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Date&quot;</span>&lt;&lt;<span class="s2">&quot; Opening Balance &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Principal &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Floating Rate&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Periodic Interest Rate&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Interest &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Instalment &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot; Closing Balance &quot;</span>&lt;&lt;endl;
+    outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;i&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;D&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PVi-1&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Pi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Ri&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;INTi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Bi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PMTi&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;PVi&quot;</span>&lt;&lt;endl;
+
+    <span class="s4">/* I calculate year by year How many the person will need to pay*/</span>
+
+    <span class="s3">for</span>(<span class="s3">int </span>i=<span class="s5">1</span>;i&lt;NumberOfYears+<span class="s5">1</span>;i++)
+    {
+
+        <span class="s3">double </span>FloatingRate=box_muller(MEAN,ST_DEV);
+        <span class="s3">double </span>InterestRate=FloatingRate+MEAN;
+
+
+        Interest=OpeningBalance*InterestRate;
+        Instalment=Principal+Interest;
+        ClosingBalance=OpeningBalance-Principal;
+        SumPrincipal=Principal+SumPrincipal;
+
+        <span class="s4">/* I Display the array*/</span>
+
+        outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;i&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Month&lt;&lt;<span class="s2">&quot;/&quot;</span>&lt;&lt;Year&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;OpeningBalance&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Principal&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;InterestRate&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;FloatingRate&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Interest&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Instalment&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;ClosingBalance&lt;&lt;endl;
+        OpeningBalance=ClosingBalance;
+        <span class="s3">if</span>(Frequence==<span class="s2">&quot;semi-annually&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;=<span class="s5">6</span>)
+            {
+                Month=Month+<span class="s5">6</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">6</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;quarterly&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;=<span class="s5">8</span>)
+            {
+                Month=Month+<span class="s5">3</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">3</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;monthly&quot;</span>)
+        {
+            <span class="s3">if</span>(Month&lt;<span class="s5">12</span>)
+            {
+                Month=Month+<span class="s5">1</span>;
+            }
+            <span class="s3">else</span>
+            {
+                Month=Month+<span class="s5">1</span>-<span class="s5">12</span>;
+                Year=Year+<span class="s5">1</span>;
+            }
+
+
+        }
+        <span class="s3">else if</span>(Frequence==<span class="s2">&quot;yearly&quot;</span>)
+        {
+            Year=Year+<span class="s5">1</span>;
+        }
+    }
+    outData&lt;&lt;<span class="s2">&quot;;;;;&quot;</span>&lt;&lt;SumPrincipal&lt;&lt;endl;
+    outData&lt;&lt;endl;
+
+}
+
+
+
+
+
+
+
+
+<span class="s3">void </span>Introduction()
+{
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[92;100m    Hello my name is JARVIS I am a program helping you to calculate your bank loan. </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                     I will do my best to guide you through the process             </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;                  &quot;</span>;
+
+}
+
+
+<span class="s3">int </span>All_Step()
+{
+
+    <span class="s4">/* First Step */</span>
+
+    string Name, FirstName, Sure;
+    <span class="s3">int </span>monthofcredit, yearofcredit,monthoftoday, yearoftoday, NotunderstandSure=<span class="s5">0</span>;
+
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;44m                  First step you have to answer some question  :) </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+
+    Name=enterName();
+    FirstName=enterFirstName();
+    monthoftoday=Enter_date_starting_month_of_today();
+    yearoftoday=Enter_date_starting_year_of_today();
+    monthofcredit=Enter_date_starting_month();
+    yearofcredit=Enter_date_starting_year();
+
+    <span class="s3">if</span>(yearoftoday&gt;yearofcredit)
+    {
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[31;40m it's impossible to do the credit enter an other year for starting the credit </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        yearofcredit=Enter_date_starting_year();
+    }
+    <span class="s3">else if</span>((yearoftoday==yearofcredit)&amp;&amp;(monthoftoday&gt;monthofcredit))
+    {
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[31;40m it's impossible to do the credit enter an other month for starting the credit </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        monthofcredit=Enter_date_starting_month();
+    }
+
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m The information you have entered is : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Name                         : &quot;</span>&lt;&lt;Name &lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m FirstName                    : &quot;</span>&lt;&lt;FirstName&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Date of Today                : &quot;</span>&lt;&lt;monthoftoday&lt;&lt;<span class="s2">&quot;/&quot;</span>&lt;&lt;yearoftoday&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Date You want Start The Loan : &quot;</span>&lt;&lt;monthofcredit&lt;&lt;<span class="s2">&quot;/&quot;</span>&lt;&lt;yearofcredit&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+
+    <span class="s3">while</span>(NotunderstandSure==<span class="s5">0</span>)
+    {
+        cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Do you agree with the information you have given us  (Yes/No) : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;<span class="s2">&quot; &quot;</span>;
+        cin &gt;&gt; Sure;
+        <span class="s3">if </span>((Sure == <span class="s2">&quot;Yes&quot;</span>) || (Sure == <span class="s2">&quot;yes&quot;</span>) || (Sure == <span class="s2">&quot;YES&quot;</span>))
+        {
+            NotunderstandSure = <span class="s5">1</span>;
+
+        }
+        <span class="s3">else if </span>((Sure == <span class="s2">&quot;No&quot;</span>) || (Sure == <span class="s2">&quot;no&quot;</span>) || (Sure==<span class="s2">&quot;NO&quot;</span>))
+        {
+            <span class="s3">int </span>Wichinformation=<span class="s5">0</span>;
+            cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m  Let's Start Again :)  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+            cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+            cout&lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m  what information do you want to change (Enter 1, 2, 3 or 4) </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+            cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m 1) Name                         : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+            cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m 2) FirstName                    : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+            cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m 3) Date of Today                : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+            cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m 4) Date You want Start The Loan : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+            cout&lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>;
+            cout&lt;&lt;<span class="s2">&quot; &quot;</span>;
+            cin&gt;&gt;Wichinformation;
+            cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+
+
+            <span class="s3">if</span>(Wichinformation==<span class="s5">1</span>)
+            {
+                Name = enterName();
+            }
+            <span class="s3">else if</span>(Wichinformation==<span class="s5">2</span>)
+            {
+                FirstName=enterFirstName();
+            }
+            <span class="s3">else if</span>(Wichinformation==<span class="s5">3</span>)
+            {
+                monthoftoday=Enter_date_starting_month_of_today();
+                yearoftoday=Enter_date_starting_year_of_today();
+
+            }
+            <span class="s3">else if</span>(Wichinformation==<span class="s5">4</span>)
+            {
+                monthofcredit=Enter_date_starting_month();
+                yearofcredit=Enter_date_starting_year();
+            }
+
+
+        }
+        <span class="s3">else</span>
+        {
+
+            cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Can you repeat please?  </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+
+        }
+    }
+
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m The information The information you have entered are : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Name                         : &quot;</span>&lt;&lt;Name &lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m FirstName                    : &quot;</span>&lt;&lt;FirstName&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Date of Today                : &quot;</span>&lt;&lt;monthoftoday&lt;&lt;<span class="s2">&quot;/&quot;</span>&lt;&lt;yearoftoday&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Date You want Start The Loan : &quot;</span>&lt;&lt;monthofcredit&lt;&lt;<span class="s2">&quot;/&quot;</span>&lt;&lt;yearofcredit&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+
+    ofstream outData;
+    outData.open(<span class="s2">&quot;Final Project.csv&quot;</span>,ios::app);
+
+    outData&lt;&lt;endl;
+    outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Name&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Name&lt;&lt;endl;
+    outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;First Name&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;FirstName&lt;&lt;endl;
+    outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Today&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;monthoftoday&lt;&lt;<span class="s2">&quot;/&quot;</span>&lt;&lt;yearoftoday&lt;&lt;endl;
+    outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Start Month&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;monthofcredit&lt;&lt;<span class="s2">&quot;/&quot;</span>&lt;&lt;yearofcredit&lt;&lt;endl;
+
+
+
+    <span class="s4">/* Second Step */</span>
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;44m                   Second Step                   </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    <span class="s3">int </span>NotunderstandSure2 =<span class="s5">0</span>;
+    <span class="s3">int </span>SecondVariableDifferent=<span class="s5">0</span>;
+    <span class="s3">int </span>ThirdVariableDifferent = <span class="s5">0</span>;
+    <span class="s3">int </span>FirstVariable =<span class="s5">10</span>;
+    <span class="s3">int </span>SecondVariable=<span class="s5">10</span>;
+    <span class="s3">int </span>ThirdVariable  = <span class="s5">10</span>;
+    <span class="s3">int </span>NewVariable;
+    <span class="s3">int </span>Number_corresponding_to_variable[<span class="s5">5</span>] = {<span class="s5">1</span>, <span class="s5">2</span>, <span class="s5">3</span>, <span class="s5">4</span>, <span class="s5">5</span>};
+    <span class="s3">int </span>VariableChoose[<span class="s5">3</span>] = {<span class="s5">0</span>, <span class="s5">0</span>, <span class="s5">0</span>};
+    string Variables[<span class="s5">5</span>] = {<span class="s2">&quot;Interest Rate.&quot;</span>, <span class="s2">&quot;Number Of Years&quot;</span>, <span class="s2">&quot;Principal.&quot;</span>, <span class="s2">&quot;Instalment.&quot;</span>, <span class="s2">&quot;Opening Balance.&quot;</span>};
+
+
+
+
+
+    cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m You will have the choice between the different variable : </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+    cout &lt;&lt; <span class="s2">&quot;       &quot; </span>&lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Interest Rate. </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; <span class="s2">&quot;       &quot; </span>&lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Number Of Years. </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt; endl;
+    cout &lt;&lt; <span class="s2">&quot;       &quot; </span>&lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Principal      </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; <span class="s2">&quot;       &quot; </span>&lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Instalment.      </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt; endl;
+    cout &lt;&lt; <span class="s2">&quot;       &quot; </span>&lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m             Opening Balance             </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m You only need to choose 3 of these variables </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+
+    <span class="s3">while </span>((FirstVariable &gt; <span class="s5">4</span>) || (FirstVariable &lt; <span class="s5">0</span>))
+    {
+        cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m What first variable do you choose? </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+        <span class="s3">for </span>(<span class="s3">int </span>i = <span class="s5">0</span>; i &lt; <span class="s5">5</span>; i++)
+        {
+            cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m&quot; </span>&lt;&lt; Number_corresponding_to_variable[i] &lt;&lt; <span class="s2">&quot;)&quot; </span>&lt;&lt; Variables[i] &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+        }
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter the number corresponding to the variable (Enter 1, 2 , 3 , 4 or 5): </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; <span class="s2">&quot; &quot;</span>;
+        cin &gt;&gt; FirstVariable;
+        FirstVariable = FirstVariable - <span class="s5">1</span>;
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        <span class="s3">if </span>((FirstVariable &gt; <span class="s5">4</span>) || (FirstVariable &lt; <span class="s5">0</span>))
+        {
+            cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+            cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[31;40m You can not enter this number thanks for starting again </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+            cout &lt;&lt; endl;
+
+        }
+    }
+
+    <span class="s3">while </span>((SecondVariableDifferent == <span class="s5">0</span>) || (SecondVariable &gt; <span class="s5">4</span>) || (SecondVariable &lt; <span class="s5">0</span>))
+    {
+        cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m What second variable do you choose? </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+        <span class="s3">for </span>(<span class="s3">int </span>i = <span class="s5">0</span>; i &lt; <span class="s5">5</span>; i++)
+        {
+            <span class="s3">if </span>(i != FirstVariable)
+            {
+                cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m&quot; </span>&lt;&lt; Number_corresponding_to_variable[i] &lt;&lt; <span class="s2">&quot;)&quot; </span>&lt;&lt; Variables[i] &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt; endl;
+            }
+        }
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter the number corresponding to the variable (Enter 1, 2 , 3 , 4 or 5): </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; <span class="s2">&quot; &quot;</span>;
+        cin &gt;&gt; SecondVariable;
+        SecondVariable = SecondVariable - <span class="s5">1</span>;
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        <span class="s3">if </span>((SecondVariable == FirstVariable) || (SecondVariable &gt; <span class="s5">4</span>) || (SecondVariable &lt; <span class="s5">0</span>))
+        {
+            cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+            cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[31;40m You can not enter this number thanks for starting again </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+            cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        }
+        <span class="s3">else</span>
+        {
+            SecondVariableDifferent = <span class="s5">1</span>;
+        }
+    }
+
+
+    <span class="s3">while </span>((ThirdVariableDifferent == <span class="s5">0</span>) || (ThirdVariable &gt; <span class="s5">4</span>) || (ThirdVariable &lt; <span class="s5">0</span>))
+    {
+        cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m What third variable do you choose? </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+        <span class="s3">for </span>(<span class="s3">int </span>i = <span class="s5">0</span>; i &lt; <span class="s5">5</span>; i++)
+        {
+            <span class="s3">if </span>((i != FirstVariable) &amp;&amp; (i != SecondVariable))
+            {
+                cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m&quot; </span>&lt;&lt; Number_corresponding_to_variable[i] &lt;&lt; <span class="s2">&quot;)&quot; </span>&lt;&lt; Variables[i] &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt; endl;
+            }
+        }
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter the number corresponding to the variable (Enter 1, 2 , 3 , 4 or 5): </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; <span class="s2">&quot; &quot;</span>;
+        cin &gt;&gt; ThirdVariable;
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        ThirdVariable = ThirdVariable - <span class="s5">1</span>;
+        <span class="s3">if </span>((ThirdVariable == FirstVariable) || (ThirdVariable == SecondVariable) || (ThirdVariable &gt; <span class="s5">4</span>) || (ThirdVariable &lt; <span class="s5">0</span>))
+        {
+            cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+            cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[31;40m You can not enter this number thanks for starting again </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+            cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        }
+        <span class="s3">else</span>
+            {
+            ThirdVariableDifferent = <span class="s5">1</span>;
+            }
+    }
+
+    VariableChoose[<span class="s5">0</span>] = FirstVariable;
+    VariableChoose[<span class="s5">1</span>] = SecondVariable;
+    VariableChoose[<span class="s5">2</span>] = ThirdVariable;
+    string Sure2;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m The Variable you have entered are : : </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+    <span class="s3">for </span>(<span class="s3">int </span>i = <span class="s5">0</span>; i &lt; <span class="s5">3</span>; i++)
+    {
+        cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m&quot; </span>&lt;&lt; Variables[VariableChoose[i]] &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+    }
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+
+    <span class="s3">while </span>(NotunderstandSure2 == <span class="s5">0</span>)
+    {
+        NewVariable = <span class="s5">6</span>;
+        cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Do you agree with the information you have given us  (Yes/No) : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>;
+        cout&lt;&lt;<span class="s2">&quot; &quot;</span>;
+        cin &gt;&gt; Sure2;
+        <span class="s3">if </span>((Sure2 == <span class="s2">&quot;Yes&quot;</span>) || (Sure2 == <span class="s2">&quot;yes&quot;</span>) || (Sure2 == <span class="s2">&quot;YES&quot;</span>))
+        {
+            NotunderstandSure2 = <span class="s5">1</span>;
+        }
+        <span class="s3">else if </span>((Sure2 == <span class="s2">&quot;No&quot;</span>) || (Sure2 == <span class="s2">&quot;NO&quot;</span>) || (Sure2 == <span class="s2">&quot;no&quot;</span>))
+        {
+            <span class="s3">int </span>Wichinformation2 = <span class="s5">6</span>;
+            cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m  Let's Start Again :)  </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+            cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+
+            <span class="s3">while </span>((Wichinformation2 &gt; <span class="s5">2</span>) || (Wichinformation2 &lt; <span class="s5">0</span>))
+            {
+
+                cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m  what information do you want to change (Enter 1, 2 or 3) </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+                <span class="s3">for </span>(<span class="s3">int </span>i = <span class="s5">0</span>; i &lt; <span class="s5">3</span>; i++)
+                {
+                    cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m&quot; </span>&lt;&lt; i + <span class="s5">1 </span>&lt;&lt; <span class="s2">&quot;)&quot; </span>&lt;&lt; Variables[VariableChoose[i]] &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+                }
+
+                cin &gt;&gt; Wichinformation2;
+                Wichinformation2 = Wichinformation2 - <span class="s5">1</span>;
+            }
+
+
+            <span class="s3">if </span>(Wichinformation2 == <span class="s5">0</span>)
+            {
+                <span class="s3">while </span>((NewVariable &gt; <span class="s5">4</span>) || (NewVariable &lt; -<span class="s5">1</span>))
+                {
+                    cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Enter the variable by which you want to replace &quot;</span>
+                         &lt;&lt; Variables[VariableChoose[<span class="s5">0</span>]] &lt;&lt; <span class="s2">&quot; :</span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+                    <span class="s3">for </span>(<span class="s3">int </span>i = <span class="s5">0</span>; i &lt; <span class="s5">5</span>; i++) {
+                        <span class="s3">if </span>((i != VariableChoose[<span class="s5">0</span>]) &amp;&amp; (i != VariableChoose[<span class="s5">1</span>]) &amp;&amp; (i != VariableChoose[<span class="s5">2</span>]))
+                        {
+
+                            cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m&quot; </span>&lt;&lt; i + <span class="s5">1 </span>&lt;&lt; <span class="s2">&quot;)&quot; </span>&lt;&lt; Variables[i] &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+                        }
+
+
+                    }
+
+                    cin &gt;&gt; NewVariable;
+                    NewVariable = NewVariable - <span class="s5">1</span>;
+                    <span class="s3">if </span>((NewVariable &lt; <span class="s5">4</span>) || (NewVariable &gt; -<span class="s5">1</span>) || (NewVariable != VariableChoose[<span class="s5">1</span>]) || (NewVariable != VariableChoose[<span class="s5">2</span>]))
+                    {
+                        VariableChoose[<span class="s5">0</span>] = NewVariable;
+                    }
+                    <span class="s3">else</span>
+                        {
+                        cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Can you repeat please?  </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+                        }
+
+                }
+
+
+            } <span class="s3">else if </span>(Wichinformation2 == <span class="s5">1</span>) {
+                <span class="s3">while </span>((NewVariable &gt; <span class="s5">4</span>) || (NewVariable &lt; -<span class="s5">1</span>)) {
+                    cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Enter the variable by which you want to replace &quot;</span>
+                         &lt;&lt; Variables[VariableChoose[<span class="s5">1</span>]] &lt;&lt; <span class="s2">&quot; :</span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+                    <span class="s3">for </span>(<span class="s3">int </span>i = <span class="s5">0</span>; i &lt; <span class="s5">5</span>; i++) {
+                        <span class="s3">if </span>((i != VariableChoose[<span class="s5">0</span>]) &amp;&amp; (i != VariableChoose[<span class="s5">1</span>]) &amp;&amp; (i != VariableChoose[<span class="s5">2</span>])) {
+
+                            cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m&quot; </span>&lt;&lt; i + <span class="s5">1 </span>&lt;&lt; <span class="s2">&quot;)&quot; </span>&lt;&lt; Variables[i] &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+                        }
+
+
+                    }
+
+                    cin &gt;&gt; NewVariable;
+                    NewVariable = NewVariable - <span class="s5">1</span>;
+                    <span class="s3">if </span>((NewVariable &lt; <span class="s5">4</span>) || (NewVariable &gt; -<span class="s5">1</span>) || (NewVariable != VariableChoose[<span class="s5">0</span>]) || (NewVariable != VariableChoose[<span class="s5">2</span>])) {
+                        VariableChoose[<span class="s5">0</span>] = NewVariable;
+                    } <span class="s3">else </span>{
+                        cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Can you repeat please?  </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+                    }
+
+                }
+
+
+            } <span class="s3">else if </span>(Wichinformation2 == <span class="s5">2</span>) {
+                <span class="s3">while </span>((NewVariable &gt; <span class="s5">4</span>) || (NewVariable &lt; -<span class="s5">1</span>))
+                {
+                    cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Enter the variable by which you want to replace &quot;</span>&lt;&lt; Variables[VariableChoose[<span class="s5">2</span>]] &lt;&lt; <span class="s2">&quot; :</span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+                    <span class="s3">for </span>(<span class="s3">int </span>i = <span class="s5">0</span>; i &lt; <span class="s5">5</span>; i++)
+                    {
+                        <span class="s3">if </span>((i != VariableChoose[<span class="s5">0</span>]) &amp;&amp; (i != VariableChoose[<span class="s5">1</span>]) &amp;&amp; (i != VariableChoose[<span class="s5">2</span>]))
+                        {
+
+                            cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m&quot; </span>&lt;&lt; i + <span class="s5">1 </span>&lt;&lt; <span class="s2">&quot;)&quot; </span>&lt;&lt; Variables[i] &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+                        }
+
+
+                    }
+
+                    cin &gt;&gt; NewVariable;
+                    NewVariable = NewVariable - <span class="s5">1</span>;
+                    <span class="s3">if </span>((NewVariable &lt; <span class="s5">4</span>) || (NewVariable &gt; -<span class="s5">1</span>) || (NewVariable != VariableChoose[<span class="s5">0</span>]) ||(NewVariable != VariableChoose[<span class="s5">1</span>]))
+                    {
+                        VariableChoose[<span class="s5">0</span>] = NewVariable;
+                    }
+                    <span class="s3">else</span>
+                        {
+                        cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Can you repeat please?  </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+                        }
+
+                }
+
+            }
+
+
+        }
+        <span class="s3">else</span>
+            {
+
+            cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Can you repeat please?  </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+
+            }
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m The Variable you have entered are :  </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+        <span class="s3">for </span>(<span class="s3">int </span>i = <span class="s5">0</span>; i &lt; <span class="s5">3</span>; i++)
+        {
+            cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m&quot; </span>&lt;&lt; Variables[VariableChoose[i]] &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+        }
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    }
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;44m                   Third Step                    </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+
+    <span class="s3">double </span>Value_of_Variable[<span class="s5">3</span>]={<span class="s5">0</span>,<span class="s5">0</span>,<span class="s5">0</span>};
+    <span class="s3">for</span>(<span class="s3">int </span>i=<span class="s5">0</span>;i&lt;<span class="s5">3</span>;i++)
+    {
+        <span class="s3">if</span>(VariableChoose[i]==<span class="s5">0</span>)
+        {
+            Value_of_Variable[i]=Enter_interestrate();
+        }
+        <span class="s3">if</span>(VariableChoose[i]==<span class="s5">1</span>)
+        {
+            Value_of_Variable[i]=Enter_numberofyears();
+        }
+        <span class="s3">if</span>(VariableChoose[i]==<span class="s5">2</span>)
+        {
+            Value_of_Variable[i]=Enter_principal();
+        }
+        <span class="s3">if</span>(VariableChoose[i]==<span class="s5">3</span>)
+        {
+            Value_of_Variable[i]=Enter_instalment();
+        }
+        <span class="s3">if</span>(VariableChoose[i]==<span class="s5">4</span>)
+        {
+            Value_of_Variable[i]=Enter_openingbalance();
+        }
+
+    }
+
+    cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m The values of your variables are therefore </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+    <span class="s3">for</span>(<span class="s3">int </span>i=<span class="s5">0</span>;i&lt;<span class="s5">3</span>;i++)
+    {
+        cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m&quot; </span>&lt;&lt; Variables[VariableChoose[i]]&lt;&lt;<span class="s2">&quot; : &quot;</span>&lt;&lt;Value_of_Variable[i]&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+
+    }
+    <span class="s3">int </span>NotunderstandSure3=<span class="s5">0</span>;
+    string Sure3;
+    <span class="s3">while</span>(NotunderstandSure3==<span class="s5">0</span>)
+    {
+        cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Do you agree with the information you have given us  (Yes/No) : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;<span class="s2">&quot; &quot;</span>;
+        cin &gt;&gt; Sure3;
+        <span class="s3">if </span>((Sure3 == <span class="s2">&quot;Yes&quot;</span>) || (Sure3 == <span class="s2">&quot;yes&quot;</span>) || (Sure2 == <span class="s2">&quot;YES&quot;</span>))
+        {
+            NotunderstandSure3 = <span class="s5">1</span>;
+
+        }
+        <span class="s3">else if </span>((Sure3 == <span class="s2">&quot;No&quot;</span>) || (Sure3 == <span class="s2">&quot;no&quot;</span>) || (Sure3 ==<span class="s2">&quot;NO&quot;</span>)) {
+            <span class="s3">int </span>Wichinformation3 = <span class="s5">6</span>;
+            cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m  Let's Start Again :)  </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+            cout &lt;&lt; endl;
+
+            <span class="s3">while </span>((Wichinformation3 &gt; <span class="s5">2</span>) || (Wichinformation3 &lt; <span class="s5">0</span>)) {
+
+                cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m  what information do you want to change (Enter 1, 2 or 3) </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+                <span class="s3">for </span>(<span class="s3">int </span>i = <span class="s5">0</span>; i &lt; <span class="s5">3</span>; i++) {
+                    cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m&quot; </span>&lt;&lt; i + <span class="s5">1 </span>&lt;&lt; <span class="s2">&quot;)&quot; </span>&lt;&lt; Variables[VariableChoose[i]] &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+                }
+
+                cin &gt;&gt; Wichinformation3;
+                Wichinformation3 = Wichinformation3 - <span class="s5">1</span>;
+            }
+            <span class="s3">if</span>((Wichinformation3&lt;<span class="s5">3</span>)||(Wichinformation3&gt;<span class="s5">0</span>)) {
+                <span class="s3">for </span>(<span class="s3">int </span>j = <span class="s5">0</span>; j &lt; <span class="s5">3</span>; j++) {
+                    <span class="s3">if </span>(Wichinformation3 == VariableChoose[j]) {
+                        <span class="s3">if </span>(VariableChoose[j] == <span class="s5">0</span>) {
+                            Value_of_Variable[j] = Enter_interestrate();
+                        }
+                        <span class="s3">if </span>(VariableChoose[j] == <span class="s5">1</span>) {
+                            Value_of_Variable[j] = Enter_numberofyears();
+                        }
+                        <span class="s3">if </span>(VariableChoose[j] == <span class="s5">2</span>) {
+                            Value_of_Variable[j] = Enter_principal();
+                        }
+                        <span class="s3">if </span>(VariableChoose[j] == <span class="s5">3</span>) {
+                            Value_of_Variable[j] = Enter_instalment();
+                        }
+                        <span class="s3">if </span>(VariableChoose[j] == <span class="s5">4</span>) {
+                            Value_of_Variable[j] = Enter_openingbalance();
+                        }
+                    }
+                }
+            }
+            <span class="s3">else</span>
+                    {
+
+                        cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Can you repeat please?  </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+
+                    }
+
+                }
+
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m The values of your variables are therefore </span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+        <span class="s3">for</span>(<span class="s3">int </span>i=<span class="s5">0</span>;i&lt;<span class="s5">3</span>;i++)
+        {
+            cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m&quot; </span>&lt;&lt; Variables[VariableChoose[i]]&lt;&lt;<span class="s2">&quot; : &quot;</span>&lt;&lt;Value_of_Variable[i]&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot; </span>&lt;&lt; endl;
+
+        }
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+
+
+
+            }
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;44m                   fourth step                   </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+
+    <span class="s3">double </span>InterestRate=<span class="s5">0</span>;
+    <span class="s3">int </span>NumberOfYears=<span class="s5">0</span>;
+    <span class="s3">double </span>Principal =<span class="s5">0</span>;
+    <span class="s3">double </span>OpeningBalance=<span class="s5">0</span>;
+    <span class="s3">double </span>Instalment=<span class="s5">0</span>;
+    <span class="s3">for</span>(<span class="s3">int </span>i=<span class="s5">0</span>;i&lt;<span class="s5">3</span>;i++) {
+        <span class="s3">if </span>(VariableChoose[i] == <span class="s5">0</span>) {
+            InterestRate = Value_of_Variable[i];
+        }
+        <span class="s3">if </span>(VariableChoose[i] == <span class="s5">1</span>) {
+            NumberOfYears =(<span class="s3">int</span>) Value_of_Variable[i];
+        }
+        <span class="s3">if </span>(VariableChoose[i] == <span class="s5">2</span>) {
+            Principal = Value_of_Variable[i];
+        }
+        <span class="s3">if </span>(VariableChoose[i] == <span class="s5">3</span>) {
+            Instalment = Value_of_Variable[i];
+        }
+        <span class="s3">if </span>(VariableChoose[i] == <span class="s5">4</span>) {
+            OpeningBalance = Value_of_Variable[i];
+        }
+    }
+
+
+
+    <span class="s3">double </span>NumberOfPeriod=<span class="s5">0</span>;
+    string Frequence=frequency();
+    NumberOfPeriod=final_number_i(NumberOfYears,Frequence);
+    InterestRate=frequency_Interest_rate(InterestRate,Frequence);
+
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m The information The information you have entered are : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Frequence                    : &quot;</span>&lt;&lt;Frequence &lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Number of Period             : &quot;</span>&lt;&lt;NumberOfPeriod&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Interest Rate by Period      : &quot;</span>&lt;&lt;InterestRate&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+
+    <span class="s3">int </span>NotunderstandSure4=<span class="s5">0</span>;
+    string Sure4;
+    <span class="s3">while</span>(NotunderstandSure4==<span class="s5">0</span>)
+    {
+        cout &lt;&lt; <span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Do you agree with the information you have given us  (Yes/No) : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;<span class="s2">&quot; &quot;</span>;
+        cin &gt;&gt; Sure4;
+        <span class="s3">if </span>((Sure4 == <span class="s2">&quot;Yes&quot;</span>) || (Sure4 == <span class="s2">&quot;yes&quot;</span>) || (Sure4 == <span class="s2">&quot;YES&quot;</span>))
+        {
+            NotunderstandSure4 = <span class="s5">1</span>;
+
+        }
+        <span class="s3">else if </span>((Sure4 == <span class="s2">&quot;No&quot;</span>) || (Sure4 == <span class="s2">&quot;no&quot;</span>) || (Sure4 ==<span class="s2">&quot;NO&quot;</span>))
+        {
+            string Frequence=frequency();
+            NumberOfPeriod=final_number_i(NumberOfYears,Frequence);
+            InterestRate=frequency_Interest_rate(InterestRate,Frequence);
+        }
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m The information The information you have entered are : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Frequence                    : &quot;</span>&lt;&lt;Frequence &lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Number of Period             : &quot;</span>&lt;&lt;NumberOfPeriod&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Interest Rate by Period      : &quot;</span>&lt;&lt;InterestRate&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+
+    }
+
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m The information The information you have entered are : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Frequence                    : &quot;</span>&lt;&lt;Frequence &lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Number of Period             : &quot;</span>&lt;&lt;NumberOfPeriod&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[37;40m Interest Rate by Period      : &quot;</span>&lt;&lt;InterestRate&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m                                                                  </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+
+
+
+    outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Frequency&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Frequence&lt;&lt;endl;
+
+    <span class="s3">double </span>InterestRate2=InterestRate*<span class="s5">100</span>;
+
+        <span class="s3">if</span>(OpeningBalance==<span class="s5">0</span>)
+        {
+            outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Opening Balance &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;/&quot;</span>&lt;&lt;endl;
+        }
+        <span class="s3">else</span>
+        {
+            outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Opening Balance &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;OpeningBalance&lt;&lt;endl;
+        }
+        <span class="s3">if</span>(InterestRate==<span class="s5">0</span>)
+        {
+            outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Interest Rate &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;/&quot;</span>&lt;&lt;endl;
+        }
+        <span class="s3">else</span>
+        {
+            outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Interest Rate &quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;InterestRate2&lt;&lt;<span class="s2">&quot;%&quot;</span>&lt;&lt;endl;
+        }
+        <span class="s3">if</span>(NumberOfYears==<span class="s5">0</span>)
+        {
+            outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Number of Years&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;/&quot;</span>&lt;&lt;endl;
+        }
+        <span class="s3">else</span>
+        {
+            outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Number of Years&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;NumberOfYears&lt;&lt;endl;
+        }
+        <span class="s3">if</span>(Principal==<span class="s5">0</span>)
+        {
+            outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Principal&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;/&quot;</span>&lt;&lt;endl;
+        }
+        <span class="s3">else</span>
+        {
+            outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Principal&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Principal&lt;&lt;endl;
+        }
+        <span class="s3">if</span>(Instalment==<span class="s5">0</span>)
+        {
+            outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Instalment&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;/&quot;</span>&lt;&lt;endl;
+        }
+        <span class="s3">else</span>
+        {
+            outData&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;<span class="s2">&quot;Instalment&quot;</span>&lt;&lt;<span class="s2">&quot;;&quot;</span>&lt;&lt;Instalment&lt;&lt;endl;
+        }
+
+
+
+    <span class="s3">if</span>((OpeningBalance!=<span class="s5">0</span>)&amp;&amp;(InterestRate!=<span class="s5">0</span>)&amp;&amp;(NumberOfYears!=<span class="s5">0</span>))
+    {
+
+        Fixed_OpeningBalance_InterestRate_NumberOfYears(OpeningBalance,InterestRate,NumberOfPeriod,monthofcredit,yearofcredit,Frequence);
+    }
+    <span class="s3">else if</span>((InterestRate!=<span class="s5">0</span>)&amp;&amp;(NumberOfYears!=<span class="s5">0</span>)&amp;&amp;(Instalment!=<span class="s5">0</span>))
+    {
+
+        Fixed_NumberOfYears_InterestRate_Instalment(NumberOfPeriod,InterestRate,Instalment,monthofcredit,yearofcredit,Frequence);
+    }
+    <span class="s3">else if</span>((Principal!=<span class="s5">0</span>)&amp;&amp;(InterestRate!=<span class="s5">0</span>)&amp;&amp;(NumberOfYears!=<span class="s5">0</span>))
+    {
+        Fixed_Principal_InterestRate_NumberOfYears(Principal,InterestRate,NumberOfPeriod,monthofcredit,yearofcredit,Frequence);
+    }
+    <span class="s3">else if</span>((InterestRate!=<span class="s5">0</span>)&amp;&amp;(OpeningBalance!=<span class="s5">0</span>)&amp;&amp;(Principal!=<span class="s5">0</span>))
+    {
+        Fixed_OpeningBalance_InterestRate_Principal(OpeningBalance,InterestRate,Principal,monthofcredit,yearofcredit,Frequence);
+    }
+    <span class="s3">else if</span>((OpeningBalance!=<span class="s5">0</span>)&amp;&amp;(InterestRate!=<span class="s5">0</span>)&amp;&amp;(Instalment!=<span class="s5">0</span>))
+    {
+        Fixed_OpeningBalance_InterestRate_Instalment(OpeningBalance,InterestRate,Instalment,monthofcredit,yearofcredit,Frequence);
+    }
+    <span class="s3">else if</span>((OpeningBalance!=<span class="s5">0</span>)&amp;&amp;(NumberOfYears!=<span class="s5">0</span>)&amp;&amp;(Instalment!=<span class="s5">0</span>))
+    {
+        Fixed_Instalment_NumberOfYears_OpeningBalance(NumberOfPeriod,OpeningBalance,Instalment,monthofcredit,yearofcredit,Frequence);
+    }
+    <span class="s3">else if</span>((OpeningBalance!=<span class="s5">0</span>)&amp;&amp;(NumberOfYears!=<span class="s5">0</span>)&amp;&amp;(Principal!=<span class="s5">0</span>))
+    {
+        Fixed_OpeningBalance_NumberOfYears_Principal(NumberOfYears,Principal,OpeningBalance,monthofcredit,yearofcredit,Frequence);
+    }
+    outData&lt;&lt;<span class="s2">&quot;;;;;;;;;;;;;;;;;;;;;;;;;;;&quot;</span>&lt;&lt;endl;
+    cout&lt;&lt;endl;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m We managed to calculate your loan, thanks for using Jarvis. :) </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="s3">void </span>Passworld()
+{
+    string passworld;
+    cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[32;40m Enter the passworld : </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>;
+    cout&lt;&lt;<span class="s2">&quot; &quot;</span>;
+    cin&gt;&gt;passworld;
+    cout&lt;&lt;endl;
+    <span class="s3">if</span>(passworld!=<span class="s2">&quot;GDCB&quot;</span>)
+    {
+        cout&lt;&lt;<span class="s2">&quot;</span><span class="s3">\x1b</span><span class="s2">[31;40m Wrong passworld fucking Bastard </span><span class="s3">\x1b</span><span class="s2">[0m&quot;</span>&lt;&lt;endl;
+        cout&lt;&lt;endl;
+        Passworld();
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="s3">int </span>main(<span class="s3">int </span>argc, <span class="s3">char</span>** argv)
+{
+
+All_Step();
+
+}
+</pre>
+</body>
+</html>
